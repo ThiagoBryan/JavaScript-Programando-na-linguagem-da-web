@@ -1,9 +1,11 @@
 var botaoAdicionar = document.querySelector("#adicionar-paciente");
-botaoAdicionar.addEventListener("click", function(){
-    // previne comportamento padrão
-    event.preventDefault();
-
-
+botaoAdicionar.addEventListener("click", function(){ //titulo.addEventListener("click", function() {}
+    // escutar o evento quando o ususario(alguma ação)                                  // funçao anônima
+                                                    
+ // previne comportamento padrão
+ event.preventDefault();
+    
+    
 var form = document.querySelector("#form-adiciona");
                                 // para ter acessso aos input(dados)
 
@@ -14,6 +16,17 @@ var paciente = obtemPaciententeDoFormulario(form); // criei uma função
 //CRIA A TR E A TD DO PACIENTE
 
 var pacienteTr = montaTr(paciente); // criei uma função
+var erro = validaPaciente(paciente);
+
+
+
+if(erro.length > 0){
+    var mensagemErro = document.querySelector("#mensagem-erro");
+    mensagemErro.textContent = erro;
+    return;
+}
+
+
 
 //ADICONA PACIENTE NA TABELA
 var tabela = document.querySelector("#tabela-pacientes");
@@ -58,6 +71,23 @@ function montaTd(dado,classe){
 
     return td;
 }
+
+
+function validaPaciente(paciente){
+
+    var erros = [];
+
+    if(!validaPeso(paciente.peso)){
+        erros.push("Peso é Inválido");
+    }   // para colocar algo no array
+    
+    if(!validaAltura(paciente.altura)){
+        erros.push("Altura é Inválida");
+    }
+        return erros;
+}
+
+
 
 
 
