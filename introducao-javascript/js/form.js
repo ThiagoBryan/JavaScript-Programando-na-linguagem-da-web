@@ -13,22 +13,14 @@ var form = document.querySelector("#form-adiciona");
 
 var paciente = obtemPaciententeDoFormulario(form); // criei uma função 
 
-//CRIA A TR E A TD DO PACIENTE
-
-var pacienteTr = montaTr(paciente); // criei uma função
 var erros = validaPaciente(paciente);
-
-
 
 if(erros.length > 0){
     exibeMensagensDeErro(erros);
     return;
 }
 
-//ADICONA PACIENTE NA TABELA
-var tabela = document.querySelector("#tabela-pacientes");
-
-tabela.appendChild(pacienteTr);
+adicionaPacienteNaTabela(paciente); // Função
 
 form.reset(); // limpar o campo
 var mensagensErro = document.querySelector ("#mensagens-erro");
@@ -36,6 +28,16 @@ mensagensErro.innerHTML = "";
   // permite controlar o HTML interno de um elemento
     // neste caso vai apagar as mensagens de erro e trocar pela nova mensagem
 })
+
+function adicionaPacienteNaTabela(paciente){
+    //CRIA A TR E A TD DO PACIENTE
+
+    var pacienteTr = montaTr(paciente); // criei uma função
+    
+    //ADICONA PACIENTE NA TABELA
+    var tabela = document.querySelector("#tabela-pacientes");
+    tabela.appendChild(pacienteTr);
+}
 
 function exibeMensagensDeErro(erros){
     var ul = document.querySelector("#mensagens-erro");
